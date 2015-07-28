@@ -62,12 +62,12 @@ describe('stSearch Directive', function () {
 
             var input = angular.element(ths[0].children[0]);
             input[0].value = 're';
-            input.triggerHandler('input');
+            input.triggerHandler('keydown');
             trs = element.find('tr.test-filtered');
-            expect(trs.length).toBe(5);
+            expect(trs.length).toBe(5); // triggered event is deferred so still seeing whole collection.
             $timeout.flush();
             trs = element.find('tr.test-filtered');
-            expect(trs.length).toBe(3);
+            expect(trs.length).toBe(3); // flushed previous deferred actions so collection is filtered.
             expect(trToModel(trs)).toEqual([
                 {name: 'Renard', firstname: 'Laurent', age: 66},
                 {name: 'Renard', firstname: 'Olivier', age: 33},
@@ -80,7 +80,7 @@ describe('stSearch Directive', function () {
 
             var input = angular.element(ths[1].children[0]);
             input[0].value = 're';
-            input.triggerHandler('input');
+            input.triggerHandler('keydown');
             $timeout.flush();
             trs = element.find('tr.test-filtered');
             expect(trs.length).toBe(4);
@@ -97,7 +97,7 @@ describe('stSearch Directive', function () {
 
             var input = angular.element(ths[1].children[0]);
             input[0].value = 're';
-            input.triggerHandler('input');
+            input.triggerHandler('keydown');
 
             $timeout.flush(399);
             trs = element.find('tr.test-filtered');
@@ -145,7 +145,7 @@ describe('stSearch Directive', function () {
 
             var input = angular.element(ths[1].children[0]);
             input[0].value = 're';
-            input.triggerHandler('input');
+            input.triggerHandler('keydown');
 
             $timeout.flush(844);
             trs = element.find('tr.test-filtered');
@@ -201,7 +201,7 @@ describe('stSearch Directive', function () {
 
             var input = angular.element(ths[0].children[0]);
             input[0].value = 're';
-            input.triggerHandler('input');
+            input.triggerHandler('keydown');
             trs = element.find('tr.test-filtered');
             expect(trs.length).toBe(5);
             $timeout.flush();
@@ -267,7 +267,7 @@ describe('stSearch Directive', function () {
 
             var input = angular.element(ths[0].children[0]);
             input[0].value = 're';
-            input.triggerHandler('input');
+            input.triggerHandler('keydown');
             trs = element.find('tr.test-filtered');
             expect(trs.length).toBe(6);
             $timeout.flush();
@@ -285,7 +285,7 @@ describe('stSearch Directive', function () {
 
             var input = angular.element(ths[1].children[0]);
             input[0].value = 're';
-            input.triggerHandler('input');
+            input.triggerHandler('keydown');
             $timeout.flush();
             var trs = element.find('tr.test-filtered');
             expect(trs.length).toBe(4);
@@ -302,10 +302,10 @@ describe('stSearch Directive', function () {
 
             var input = angular.element(ths[0].children[0]);
             input[0].value = 're';
-            input.triggerHandler('input');
+            input.triggerHandler('keydown');
             $timeout.flush();
             input[0].value = '';
-            input.triggerHandler('input');
+            input.triggerHandler('keydown');
             $timeout.flush();
             trs = element.find('tr.test-filtered');
             expect(trs.length).toBe(6);
